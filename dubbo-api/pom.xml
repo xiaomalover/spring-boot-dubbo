@@ -1,13 +1,14 @@
 <?xml version="1.0"?>
 <project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>com.weison</groupId>
-		<artifactId>dubbo-boot-start</artifactId>
-		<version>1.0.0</version>
-	</parent>
-	<artifactId>dubbo-api</artifactId>
-	
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+        xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.weison</groupId>
+        <artifactId>dubbo-boot-start</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    <!--接口定义模块，消费者，生产者要依赖此模块-->
+    <artifactId>dubbo-api</artifactId>
+
 </project>
