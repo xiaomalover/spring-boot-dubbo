@@ -17,7 +17,7 @@
     <dubbo:protocol name="dubbo" port="20880"/>  
     
     <!-- 声明需要暴露的服务接口 -->  
-    <dubbo:service interface="com.weison.HelloService" ref="helloService" timeout="10000" retries="0"/>
+    <dubbo:service interface="com.weison.api.HelloService" ref="helloService" timeout="10000" retries="0"/>
     
     <!-- 和本地 bean 一样实现服务 -->  
     <bean id="helloService" class="com.weison.service.impl.HelloServiceImpl" />

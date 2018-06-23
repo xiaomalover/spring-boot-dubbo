@@ -9,4 +9,3 @@ server:
 spring:
     application:
         name: dubbo-provider
-   

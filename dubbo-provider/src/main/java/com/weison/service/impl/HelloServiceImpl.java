@@ -1,6 +1,6 @@
 package com.weison.service.impl;
 
-import com.weison.HelloService;
+import com.weison.api.HelloService;
 
 public class HelloServiceImpl implements HelloService {
 

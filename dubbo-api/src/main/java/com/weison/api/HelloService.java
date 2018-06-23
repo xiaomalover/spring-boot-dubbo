@@ -1,4 +1,4 @@
-package com.weison;
+package com.weison.api;
 
 public interface HelloService {
 

@@ -18,6 +18,8 @@
         <module>dubbo-consumer</module>
         <!--生产者模块-->
         <module>dubbo-provider</module>
+        <!--通用模块-->
+        <module>dubbo-common</module>
     </modules>
 
     <parent>

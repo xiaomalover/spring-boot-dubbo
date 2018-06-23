@@ -14,6 +14,6 @@
 	<dubbo:registry address="zookeeper://127.0.0.1:2181" /> 
      
     <!-- 引用的服务，可以和本地bean一样使用helloService 立即初始化,不用等到有人注入或引用该实例时再初始化-->
-	<dubbo:reference id="helloService" interface="com.weison.HelloService" init="true"/>
+	<dubbo:reference id="helloService" interface="com.weison.api.HelloService" init="true"/>
 	
 </beans>  
