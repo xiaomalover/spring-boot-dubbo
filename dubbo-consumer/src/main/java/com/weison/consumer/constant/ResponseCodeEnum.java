@@ -70,7 +70,6 @@ public enum ResponseCodeEnum {
     HTTP_NOT_EXTENDED(510, ""),
     HTTP_NETWORK_AUTHENTICATION_REQUIRED(511, ""),
 
-
     /**
      * 自定义状态码
      */

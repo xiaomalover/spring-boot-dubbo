@@ -6,7 +6,6 @@ import com.weison.base.model.User;
 import com.weison.base.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 /**

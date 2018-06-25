@@ -1,7 +1,6 @@
 package com.weison.base.api;
 
 import com.weison.base.model.User;
-
 import java.util.List;
 
 /**

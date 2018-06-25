@@ -1,7 +1,6 @@
 package com.weison.base.model;
 
 import org.hibernate.validator.constraints.NotBlank;
-
 import java.io.Serializable;
 
 public class User implements Serializable{

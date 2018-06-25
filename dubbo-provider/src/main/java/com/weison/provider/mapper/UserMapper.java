@@ -1,7 +1,6 @@
 package com.weison.provider.mapper;
 
 import com.weison.base.model.User;
-
 import java.util.List;
 
 public interface UserMapper {
