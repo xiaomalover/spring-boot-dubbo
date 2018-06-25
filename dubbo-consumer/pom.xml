@@ -11,14 +11,22 @@
     <artifactId>dubbo-consumer</artifactId>
 
     <dependencies>
+        <!--定义接口，类-->
         <dependency>
             <groupId>com.weison</groupId>
             <artifactId>dubbo-base</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <!-- dubbo -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>dubbo</artifactId>
+        </dependency>
+        <!-- 不引入也可以，只有生产者会用到，但是不引入会在消费者传入分类参数时报警告-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>5.1.4</version>
         </dependency>
     </dependencies>
 
