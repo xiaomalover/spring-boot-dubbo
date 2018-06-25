@@ -1,9 +1,12 @@
-# Tomcat
+# Jetty
 server:
-    tomcat:
-        uri-encoding: UTF-8
-        max-threads: 1000
-        min-spare-threads: 30
+    compression:
+        enabled: true
+        min-response-size: 1
+    jetty:
+        acceptors: 2 #acceptor线程数
+        max-http-post-size: 0 #put或post方法最大字节数
+        selectors: 100 #selector线程数
     port: 8020
 # spring
 spring:
