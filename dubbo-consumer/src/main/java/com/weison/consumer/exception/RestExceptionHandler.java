@@ -14,7 +14,7 @@ public class RestExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     @ResponseBody
-    public Object requestNotReadable() {
-        return new Result<>(ResponseCodeEnum.HTTP_INTERNAL_SERVER_ERROR);
+    public Object requestNotReadable(Exception e) {
+        return new Result<>(ResponseCodeEnum.HTTP_INTERNAL_SERVER_ERROR, e.getMessage());
     }
 }

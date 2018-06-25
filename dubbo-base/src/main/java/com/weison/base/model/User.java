@@ -1,5 +1,7 @@
 package com.weison.base.model;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.io.Serializable;
 
 public class User implements Serializable{
@@ -8,10 +10,13 @@ public class User implements Serializable{
 
     private Integer userId;
 
+    @NotBlank(message = "用户名不能为空")
     private String userName;
 
+    @NotBlank(message = "密码不能为空")
     private String password;
 
+    @NotBlank(message = "手机号不能为空")
     private String phone;
 
     public Integer getUserId() {

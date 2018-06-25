@@ -5,21 +5,33 @@ import com.weison.base.model.User;
 import com.weison.consumer.constant.ResponseCodeEnum;
 import com.weison.consumer.dto.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
-@RequestMapping(value = "/user")
+@RequestMapping(value = "user")
 public class UserController {
 
     @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/insert")
-    public Object addUser(User user) {
+    @PostMapping("/insert")
+    public Object addUser(@Valid User user, BindingResult result) {
+
+        if (result.hasErrors()) {
+            StringBuffer errorMsg = new StringBuffer();
+            result.getAllErrors().forEach((err) -> {
+                if (errorMsg.length() > 0) {
+                    errorMsg.append(";");
+                }
+                errorMsg.append(err.getDefaultMessage());
+            });
+            return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR, errorMsg.toString());
+        }
+
         Integer num = userService.addUser(user);
         if (num > 0) {
             return new Result<>(ResponseCodeEnum.HTTP_OK);
