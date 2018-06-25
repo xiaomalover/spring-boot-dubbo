@@ -34,7 +34,7 @@ spring:
 mybatis:
     mapper-locations: classpath:mapping/*.xml
     type-aliases-package: com.weison.base.model
-    configLocation: classpath:/mybatis-config.xml
+    configLocation: classpath:/config/mybatis-config.xml
 #pagehelper分页插件
 pagehelper:
     helperDialect: mysql
