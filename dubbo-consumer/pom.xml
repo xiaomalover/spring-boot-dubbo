@@ -16,6 +16,10 @@
             <artifactId>dubbo-base</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
+        </dependency>
     </dependencies>
 
     <!-- 在运行mvn install的时候，自动生成主清单属性，运行java -jar xxx.jar时会根据主清单属性找到启动类，从而启动程序 -->
