@@ -9,6 +9,5 @@
         <version>1.0.0</version>
     </parent>
     <!--接口定义模块，消费者，生产者要依赖此模块-->
-    <artifactId>dubbo-api</artifactId>
-
+    <artifactId>dubbo-base</artifactId>
 </project>

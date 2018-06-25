@@ -1,0 +1,34 @@
+package com.weison.consumer.controller;
+
+import com.weison.base.model.User;
+import com.weison.base.api.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping(value = "/user")
+public class UserController {
+
+    @Autowired
+    private UserService userService;
+
+    @RequestMapping("/insert")
+    public int addUser(User user){
+        return userService.addUser(user);
+    }
+
+
+    @GetMapping(value = "/all/{pageNum}/{pageSize}", produces = {"application/json;charset=UTF-8"})
+    public Object findAllUser(@PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize){
+        return userService.findAllUser(pageNum,pageSize);
+    }
+
+    @GetMapping(value = "/{userId}", produces = {"application/json;charset=UTF-8"})
+    public Object findOneUser(@PathVariable("userId") int userId){
+
+        return userService.findOneUser(userId);
+    }
+}

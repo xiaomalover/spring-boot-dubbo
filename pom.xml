@@ -12,14 +12,12 @@
     <name>dubbo-boot-start</name>
 
     <modules>
-        <!--接口定义模块-->
-        <module>dubbo-api</module>
+        <!--基础模块-->
+        <module>dubbo-base</module>
         <!--消费者模块-->
         <module>dubbo-consumer</module>
         <!--生产者模块-->
         <module>dubbo-provider</module>
-        <!--通用模块-->
-        <module>dubbo-common</module>
     </modules>
 
     <parent>

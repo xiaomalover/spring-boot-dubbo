@@ -1,8 +1,9 @@
-package com.weison.common.log;
+package com.weison.provider.log;
 
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -16,7 +17,7 @@ public class LogAspect {
     private LogManager logManager;
 
     //Pointcut表示式
-    @Pointcut("execution(public * com.weison.api..*(..))")
+    @Pointcut("execution(public * com.weison.base.api..*(..))")
     //Point签名
     private void log() {}
 

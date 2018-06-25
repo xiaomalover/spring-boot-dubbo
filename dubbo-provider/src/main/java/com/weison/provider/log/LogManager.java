@@ -1,4 +1,4 @@
-package com.weison.common.log;
+package com.weison.provider.log;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.slf4j.Logger;
