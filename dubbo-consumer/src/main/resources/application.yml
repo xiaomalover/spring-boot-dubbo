@@ -8,6 +8,7 @@ server:
         max-http-post-size: 0 #put或post方法最大字节数
         selectors: 100 #selector线程数
     port: 8020
+    #servlet-path: /weison #统一加路径，就是url加前缀
 # spring
 spring:
     application:
