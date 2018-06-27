@@ -1,11 +1,16 @@
 package com.weison.provider.service;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.github.pagehelper.PageHelper;
+import com.weison.base.constant.ResponseCodeEnum;
+import com.weison.base.dto.Result;
 import com.weison.provider.mapper.UserMapper;
 import com.weison.base.model.User;
 import com.weison.base.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import java.util.List;
 
 /**
@@ -21,11 +26,40 @@ public class UserServiceImpl implements UserService {
     /**
      * 用户注册
      * @param user 用户实体
-     * @return int
+     * @return Object
      */
     @Override
-    public int register(User user) {
-        return userMapper.insert(user);
+    @ResponseBody
+    public Object register(User user) {
+
+        User exist;
+        exist = this.findByUsername(user.getUsername());
+        if (ObjectUtil.isNotNull(exist)) {
+            return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR.getCode(), "用户名已被注册").toJson();
+        }
+
+        exist = this.findByMobile(user.getMobile());
+        if (ObjectUtil.isNotNull(exist)) {
+            return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR.getCode(), "手机号已被注册").toJson();
+        }
+
+        if(user.getUsername().length() == 0) {
+            return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR.getCode(), "用户名不能为空").toJson();
+        }
+
+        if(user.getMobile().length() == 0) {
+            return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR.getCode(), "手机号不能为空").toJson();
+        }
+
+        if(user.getPassword().length() == 0) {
+            return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR.getCode(), "密码不能为空").toJson();
+        }
+
+        if (userMapper.insert(user) > 0) {
+            return new Result<>(ResponseCodeEnum.HTTP_OK).toJson();
+        } else {
+            return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR.getCode(), "注册失败").toJson();
+        }
     }
 
     /*
@@ -42,7 +76,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findOneUser(int userId) {
-        return userMapper.selectByPrimaryKey(userId);
+    public User findById(int id) {
+        return userMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userMapper.selectByUsername(username);
+    }
+
+    @Override
+    public User findByMobile(String mobile) {
+        return userMapper.selectByMobile(mobile);
     }
 }

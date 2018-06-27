@@ -1,4 +1,4 @@
-package com.weison.consumer.constant;
+package com.weison.base.constant;
 
 /**
  * 请求状态码枚举

@@ -7,7 +7,11 @@ public interface UserMapper {
 
     int insert(User record);
 
-    User selectByPrimaryKey(Integer userId);
+    User selectByPrimaryKey(Integer id);
 
     List<User> queryAll();
+
+    User selectByUsername(String username);
+
+    User selectByMobile(String mobile);
 }

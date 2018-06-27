@@ -29,13 +29,6 @@
             <version>5.1.4</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.46</version>
-        </dependency>
-
     </dependencies>
 
     <!-- 在运行mvn install的时候，自动生成主清单属性，运行java -jar xxx.jar时会根据主清单属性找到启动类，从而启动程序 -->

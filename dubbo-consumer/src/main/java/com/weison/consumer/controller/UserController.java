@@ -2,8 +2,8 @@ package com.weison.consumer.controller;
 
 import com.weison.base.api.UserService;
 import com.weison.base.model.User;
-import com.weison.consumer.constant.ResponseCodeEnum;
-import com.weison.consumer.dto.Result;
+import com.weison.base.constant.ResponseCodeEnum;
+import com.weison.base.dto.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -32,12 +32,7 @@ public class UserController {
             return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR, errorMsg.toString());
         }
 
-        Integer num = userService.register(user);
-        if (num > 0) {
-            return new Result<>(ResponseCodeEnum.HTTP_OK);
-        } else {
-            return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR.getCode(), "添加失败");
-        }
+        return userService.register(user);
     }
 
     @GetMapping(value = "/all/{pageNum}/{pageSize}", produces = {"application/json;charset=UTF-8"})
@@ -50,6 +45,6 @@ public class UserController {
 
     @GetMapping(value = "/{userId}", produces = {"application/json;charset=UTF-8"})
     public Object findOneUser(@PathVariable("userId") int userId) {
-        return new Result<>(ResponseCodeEnum.HTTP_OK, userService.findOneUser(userId));
+        return new Result<>(ResponseCodeEnum.HTTP_OK, userService.findById(userId));
     }
 }

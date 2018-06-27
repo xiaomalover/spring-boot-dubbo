@@ -13,7 +13,7 @@ public interface UserService {
      * @param user 用户实体
      * @return User
      */
-    int register(User user);
+    Object register(User user);
 
     /**
      * 查所有用户
@@ -22,8 +22,20 @@ public interface UserService {
     List <User> findAllUser(int pageNum, int pageSize);
 
     /**
+     *
+     * @return User
+     */
+    User findById(int id);
+
+    /**
      * 查单个用户
      * @return User
      */
-    User findOneUser(int userId);
+    User findByUsername(String username);
+
+    /**
+     * 查单个用户
+     * @return User
+     */
+    User findByMobile(String mobile);
 }

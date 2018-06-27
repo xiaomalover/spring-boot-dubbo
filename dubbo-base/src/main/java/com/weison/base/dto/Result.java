@@ -1,13 +1,17 @@
-package com.weison.consumer.dto;
+package com.weison.base.dto;
 
 import com.alibaba.fastjson.JSON;
-import com.weison.consumer.constant.ResponseCodeEnum;
+import com.weison.base.constant.ResponseCodeEnum;
+
+import java.io.Serializable;
 
 /**
  * 请求返回数据对象
  * @param <T>
  */
-public class Result<T> {
+public class Result<T> implements Serializable {
+
+    private static final long serialVersionUID = -3062498620783165474L;
 
     private int code;
 
@@ -64,5 +68,9 @@ public class Result<T> {
     @Override
     public String toString() {
         return JSON.toJSONString(this);
+    }
+
+    public Object toJson() {
+        return JSON.toJSON(this);
     }
 }

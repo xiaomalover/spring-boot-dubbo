@@ -1,7 +1,7 @@
 package com.weison.consumer.exception;
 
-import com.weison.consumer.constant.ResponseCodeEnum;
-import com.weison.consumer.dto.Result;
+import com.weison.base.constant.ResponseCodeEnum;
+import com.weison.base.dto.Result;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
