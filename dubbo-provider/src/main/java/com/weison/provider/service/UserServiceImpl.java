@@ -18,8 +18,13 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;//这里会报错，但是并不会影响
 
+    /**
+     * 用户注册
+     * @param user 用户实体
+     * @return int
+     */
     @Override
-    public int addUser(User user) {
+    public int register(User user) {
         return userMapper.insert(user);
     }
 

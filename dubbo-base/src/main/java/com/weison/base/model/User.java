@@ -1,5 +1,6 @@
 package com.weison.base.model;
 
+import cn.hutool.crypto.SecureUtil;
 import org.hibernate.validator.constraints.NotBlank;
 import java.io.Serializable;
 
@@ -7,31 +8,39 @@ public class User implements Serializable{
 
     private static final long serialVersionUID = -3052498620783167474L;
 
-    private Integer userId;
+    private Integer id;
 
     @NotBlank(message = "用户名不能为空")
-    private String userName;
+    private String username;
 
     @NotBlank(message = "密码不能为空")
     private String password;
 
     @NotBlank(message = "手机号不能为空")
-    private String phone;
+    private String mobile;
 
-    public Integer getUserId() {
-        return userId;
+    private String email;
+
+    private Integer status;
+
+    private Integer created_at;
+
+    private Integer updated_at;
+
+    public Integer getId() {
+        return id;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -39,14 +48,46 @@ public class User implements Serializable{
     }
 
     public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+        this.password = SecureUtil.md5(SecureUtil.md5(password));
     }
 
-    public String getPhone() {
-        return phone;
+    public String getMobile() {
+        return mobile;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone == null ? null : phone.trim();
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Integer getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(Integer created_at) {
+        this.created_at = created_at;
+    }
+
+    public Integer getUpdated_at() {
+        return updated_at;
+    }
+
+    public void setUpdated_at(Integer updated_at) {
+        this.updated_at = updated_at;
     }
 }

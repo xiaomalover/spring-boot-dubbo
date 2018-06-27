@@ -23,4 +23,5 @@
         <!-- 为了上数据库带下划线的字段自动映射到模型 -->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
+
 </configuration>

@@ -46,3 +46,7 @@ pagehelper:
     reasonable: true
     supportMethodsArguments: true
     params: count=countSql
+#数据据迁移工具
+flyway:
+    baseline-on-migrate: true
+    table: migrations

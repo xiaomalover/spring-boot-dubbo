@@ -13,7 +13,7 @@ public interface UserService {
      * @param user 用户实体
      * @return User
      */
-    int addUser(User user);
+    int register(User user);
 
     /**
      * 查所有用户

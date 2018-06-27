@@ -5,12 +5,11 @@
 
     <insert id="insert" parameterType="com.weison.base.model.User">
         insert into
-            user_info (user_id, user_name, password, phone)
+            user_info (username, password, mobile)
         values(
-            #{userId,jdbcType=INTEGER},
-            #{userName,jdbcType=VARCHAR},
+            #{username,jdbcType=VARCHAR},
             #{password,jdbcType=VARCHAR},
-            #{phone,jdbcType=VARCHAR}
+            #{mobile,jdbcType=VARCHAR}
         )
     </insert>
 
@@ -19,7 +18,7 @@
     </select>
 
     <select id="selectByPrimaryKey" resultType="com.weison.base.model.User" parameterType="int">
-        SELECT  * from user_info where user_id = #{userId}
+        SELECT  * from user_info where id = #{id}
     </select>
 
 </mapper>

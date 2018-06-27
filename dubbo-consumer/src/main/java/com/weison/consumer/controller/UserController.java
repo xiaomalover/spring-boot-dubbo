@@ -18,8 +18,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/insert")
-    public Object addUser(@Valid User user, BindingResult result) {
+    @PostMapping("/register")
+    public Object register(@Valid User user, BindingResult result) {
 
         if (result.hasErrors()) {
             StringBuffer errorMsg = new StringBuffer();
@@ -32,7 +32,7 @@ public class UserController {
             return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR, errorMsg.toString());
         }
 
-        Integer num = userService.addUser(user);
+        Integer num = userService.register(user);
         if (num > 0) {
             return new Result<>(ResponseCodeEnum.HTTP_OK);
         } else {
