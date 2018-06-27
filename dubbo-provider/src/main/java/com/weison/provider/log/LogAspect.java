@@ -13,8 +13,13 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class LogAspect {
 
-    @Autowired
+    //@Autowired 官方不推荐在属性上注解，所以换成了下面构造器注解
     private LogManager logManager;
+
+    @Autowired
+    public LogAspect(LogManager logManager) {
+        this.logManager = logManager;
+    }
 
     //Pointcut表示式
     @Pointcut("execution(public * com.weison.base.api..*(..))")

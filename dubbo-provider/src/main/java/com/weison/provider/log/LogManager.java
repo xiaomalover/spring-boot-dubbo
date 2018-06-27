@@ -13,6 +13,7 @@ public class LogManager {
 
     private static final Boolean enableWatch = true;
 
+    @SuppressWarnings("WeakerAccess")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 
         if (!enableWatch) {
