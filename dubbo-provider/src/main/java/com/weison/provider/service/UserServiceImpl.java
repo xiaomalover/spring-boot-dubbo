@@ -2,15 +2,13 @@ package com.weison.provider.service;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.github.pagehelper.PageHelper;
+import com.weison.base.api.UserService;
 import com.weison.base.constant.ResponseCodeEnum;
 import com.weison.base.dto.Result;
-import com.weison.provider.mapper.UserMapper;
 import com.weison.base.model.User;
-import com.weison.base.api.UserService;
+import com.weison.provider.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import java.util.List;
 
 /**
@@ -25,11 +23,11 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 用户注册
+     *
      * @param user 用户实体
      * @return Object
      */
     @Override
-    @ResponseBody
     public Object register(User user) {
 
         User exist;
@@ -43,17 +41,23 @@ public class UserServiceImpl implements UserService {
             return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR.getCode(), "手机号已被注册").toJson();
         }
 
-        if(user.getUsername().length() == 0) {
+        if (user.getUsername().length() == 0) {
             return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR.getCode(), "用户名不能为空").toJson();
         }
 
-        if(user.getMobile().length() == 0) {
+        if (user.getMobile().length() == 0) {
             return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR.getCode(), "手机号不能为空").toJson();
         }
 
-        if(user.getPassword().length() == 0) {
+        if (user.getPassword().length() == 0) {
             return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR.getCode(), "密码不能为空").toJson();
         }
+
+        //TODO 自动处理
+        String timestamp = String.valueOf(System.currentTimeMillis());
+        int length = timestamp.length();
+        int now = Integer.valueOf(timestamp.substring(0,length-3));
+        user.setCreated_at(now);
 
         if (userMapper.insert(user) > 0) {
             return new Result<>(ResponseCodeEnum.HTTP_OK).toJson();
