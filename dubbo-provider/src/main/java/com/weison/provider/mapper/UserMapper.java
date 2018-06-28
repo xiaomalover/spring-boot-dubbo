@@ -14,4 +14,6 @@ public interface UserMapper {
     User selectByUsername(String username);
 
     User selectByMobile(String mobile);
+
+    User selectByUsernameOrMobile(String account);
 }

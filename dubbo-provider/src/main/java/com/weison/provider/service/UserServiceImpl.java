@@ -7,6 +7,7 @@ import com.weison.base.api.UserService;
 import com.weison.base.constant.ResponseCodeEnum;
 import com.weison.base.dto.Result;
 import com.weison.base.model.User;
+import com.weison.base.model.form.LoginForm;
 import com.weison.provider.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -69,13 +70,45 @@ public class UserServiceImpl implements UserService {
         user.setCreated_at(now);
 
         //密码加密
-        user.setPassword(SecureUtil.md5(SecureUtil.md5(user.getPassword())));
+        user.setPassword(this.encodePassword(user.getPassword()));
 
         if (userMapper.insert(user) > 0) {
             return new Result<>(ResponseCodeEnum.HTTP_OK).toJson();
         } else {
             return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR.getCode(), "注册失败").toJson();
         }
+    }
+
+    @Override
+    public Object login(LoginForm loginForm) {
+        //根据模型中的规则，验证数据的合法性
+        Set<ConstraintViolation<LoginForm>> constraintViolations = validator.validate(loginForm);
+        StringBuffer errorMsg = new StringBuffer();
+        constraintViolations.forEach((v) -> {
+            if (errorMsg.length() > 0) {
+                errorMsg.append(";");
+            }
+            errorMsg.append(v.getMessage());
+        });
+        if (errorMsg.length() > 0) {
+            return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR.getCode(), errorMsg.toString()).toJson();
+        }
+
+        //登录逻辑
+        User user;
+        //查询用户存不存在
+        user = this.findByUsernameOrMobile(loginForm.getAccount());
+        if (ObjectUtil.isNull(user)) {
+            return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR.getCode(), "用户名不正确").toJson();
+        }
+
+        //校验密码
+        if (!this.encodePassword(loginForm.getPassword()).equals(user.getPassword())) {
+            return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR.getCode(), "密码错误").toJson();
+        }
+
+        //TODO 产生token存redis
+        return new Result<>(ResponseCodeEnum.HTTP_OK).toJson();
     }
 
     /*
@@ -104,5 +137,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByMobile(String mobile) {
         return userMapper.selectByMobile(mobile);
+    }
+
+    @Override
+    public User findByUsernameOrMobile(String account) {
+        return userMapper.selectByUsernameOrMobile(account);
+    }
+
+    private String encodePassword(String password) {
+        return SecureUtil.md5(SecureUtil.md5(password));
     }
 }

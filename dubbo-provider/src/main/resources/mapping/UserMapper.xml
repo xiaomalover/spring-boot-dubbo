@@ -30,4 +30,8 @@
         SELECT  * from user_info where mobile = #{mobile}
     </select>
 
+    <select id="selectByUsernameOrMobile" resultType="com.weison.base.model.User" parameterType="String">
+        SELECT  * from user_info where username = #{acount} OR mobile = #{account}
+    </select>
+
 </mapper>
