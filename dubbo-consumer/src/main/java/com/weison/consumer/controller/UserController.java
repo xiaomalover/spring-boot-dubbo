@@ -21,6 +21,7 @@ public class UserController {
     @PostMapping("/register")
     public Object register(@Valid User user, BindingResult result) {
 
+        //验证数据合法性，虽然生产者服务里有验证，但这里也加一个，可以把不合法数据挡在消费者处，减轻生产者服务的压力
         if (result.hasErrors()) {
             StringBuffer errorMsg = new StringBuffer();
             result.getAllErrors().forEach((err) -> {

@@ -1,6 +1,7 @@
 package com.weison.provider.service;
 
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.crypto.SecureUtil;
 import com.github.pagehelper.PageHelper;
 import com.weison.base.api.UserService;
 import com.weison.base.constant.ResponseCodeEnum;
@@ -9,7 +10,11 @@ import com.weison.base.model.User;
 import com.weison.provider.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Administrator on 2017/8/16.
@@ -19,7 +24,10 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserMapper userMapper;//这里会报错，但是并不会影响
+    private UserMapper userMapper;
+
+    //验证器
+    private static Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
     /**
      * 用户注册
@@ -30,34 +38,38 @@ public class UserServiceImpl implements UserService {
     @Override
     public Object register(User user) {
 
+        //根据User模型中的规则，验证数据的合法性
+        Set<ConstraintViolation<User>> constraintViolations = validator.validate(user);
+        StringBuffer errorMsg = new StringBuffer();
+        constraintViolations.forEach((v) -> {
+            if (errorMsg.length() > 0) {
+                errorMsg.append(";");
+            }
+            errorMsg.append(v.getMessage());
+        });
+        if (errorMsg.length() > 0) {
+            return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR.getCode(), errorMsg.toString()).toJson();
+        }
+
+        //根据业务，验证数据合法性
         User exist;
         exist = this.findByUsername(user.getUsername());
         if (ObjectUtil.isNotNull(exist)) {
             return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR.getCode(), "用户名已被注册").toJson();
         }
-
         exist = this.findByMobile(user.getMobile());
         if (ObjectUtil.isNotNull(exist)) {
             return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR.getCode(), "手机号已被注册").toJson();
         }
 
-        if (user.getUsername().length() == 0) {
-            return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR.getCode(), "用户名不能为空").toJson();
-        }
-
-        if (user.getMobile().length() == 0) {
-            return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR.getCode(), "手机号不能为空").toJson();
-        }
-
-        if (user.getPassword().length() == 0) {
-            return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR.getCode(), "密码不能为空").toJson();
-        }
-
-        //TODO 自动处理
+        //写入创建时间 TODO 自动处理
         String timestamp = String.valueOf(System.currentTimeMillis());
         int length = timestamp.length();
         int now = Integer.valueOf(timestamp.substring(0,length-3));
         user.setCreated_at(now);
+
+        //密码加密
+        user.setPassword(SecureUtil.md5(SecureUtil.md5(user.getPassword())));
 
         if (userMapper.insert(user) > 0) {
             return new Result<>(ResponseCodeEnum.HTTP_OK).toJson();

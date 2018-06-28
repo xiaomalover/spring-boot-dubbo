@@ -1,6 +1,6 @@
 package com.weison.base.model;
 
-import cn.hutool.crypto.SecureUtil;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.Pattern;
@@ -13,9 +13,11 @@ public class User implements Serializable{
     private Integer id;
 
     @NotBlank(message = "用户名不能为空")
+    @Length(min = 4, message = "用户名长度不能少于4位")
     private String username;
 
     @NotBlank(message = "密码不能为空")
+    @Length(min = 4, max = 20, message = "密码长度必须为4到20位")
     private String password;
 
     @NotBlank(message = "手机号不能为空")
@@ -51,7 +53,7 @@ public class User implements Serializable{
     }
 
     public void setPassword(String password) {
-        this.password = SecureUtil.md5(SecureUtil.md5(password));
+        this.password = password;
     }
 
     public String getMobile() {
