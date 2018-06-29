@@ -1,15 +1,22 @@
 package com.weison.consumer.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.weison.base.api.UserService;
-import com.weison.base.model.User;
+import com.weison.base.domain.User;
 import com.weison.base.constant.ResponseCodeEnum;
 import com.weison.base.dto.Result;
 import com.weison.base.model.form.LoginForm;
+import com.weison.consumer.authorization.annotation.Authorization;
+import com.weison.consumer.authorization.manager.TokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
+/**
+ * @author xiaomalover <xiaomalover@gmail.com>
+ * 用户控制器
+ */
 @SuppressWarnings("SpringAutowiredFieldsWarningInspection")
 @RestController
 @RequestMapping(value = "user")
@@ -18,6 +25,9 @@ public class UserController extends BaseController{
     @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private TokenManager tokenManager;
 
     @PostMapping("/register")
     public Object register(@Valid User user, BindingResult result) {
@@ -40,7 +50,16 @@ public class UserController extends BaseController{
             return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR, errMsg);
         }
 
-        return userService.login(loginForm);
+        //走服务端登录服务
+        JSONObject jsonObject = (JSONObject) userService.login(loginForm);
+        Result res  = jsonObject.toJavaObject(Result.class);
+        if (res.getCode() == ResponseCodeEnum.HTTP_OK.getCode()) {
+            //服务端返回成功存入TOKEN
+            JSONObject jsonUser = (JSONObject) res.getData();
+            User user = jsonUser.toJavaObject(User.class);
+            tokenManager.createToken(user.getId());
+        }
+        return res;
     }
 
     @GetMapping(value = "/all/{pageNum}/{pageSize}", produces = {"application/json;charset=UTF-8"})
@@ -51,6 +70,7 @@ public class UserController extends BaseController{
         );
     }
 
+    @Authorization
     @GetMapping(value = "/{userId}", produces = {"application/json;charset=UTF-8"})
     public Object findOneUser(@PathVariable("userId") int userId) {
         return new Result<>(ResponseCodeEnum.HTTP_OK, userService.findById(userId));

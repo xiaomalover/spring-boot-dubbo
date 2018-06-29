@@ -6,9 +6,12 @@ import com.github.pagehelper.PageHelper;
 import com.weison.base.api.UserService;
 import com.weison.base.constant.ResponseCodeEnum;
 import com.weison.base.dto.Result;
-import com.weison.base.model.User;
+import com.weison.base.domain.User;
 import com.weison.base.model.form.LoginForm;
+import com.weison.base.util.RedissonUtil;
 import com.weison.provider.mapper.UserMapper;
+import org.redisson.api.RMap;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.validation.ConstraintViolation;
@@ -27,7 +30,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
-    //验证器
+    @Autowired
+    private RedissonClient redisson;
+
+    /**
+     * 验证器
+     */
     private static Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
     /**
@@ -39,17 +47,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public Object register(User user) {
 
-        //根据User模型中的规则，验证数据的合法性
-        Set<ConstraintViolation<User>> constraintViolations = validator.validate(user);
-        StringBuffer errorMsg = new StringBuffer();
-        constraintViolations.forEach((v) -> {
-            if (errorMsg.length() > 0) {
-                errorMsg.append(";");
-            }
-            errorMsg.append(v.getMessage());
-        });
+        //根据模型中的规则，验证数据的合法性
+        String errorMsg = this.getValidateErrorMsg(user);
         if (errorMsg.length() > 0) {
-            return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR.getCode(), errorMsg.toString()).toJson();
+            return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR.getCode(), errorMsg).toJson();
         }
 
         //根据业务，验证数据合法性
@@ -82,16 +83,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public Object login(LoginForm loginForm) {
         //根据模型中的规则，验证数据的合法性
-        Set<ConstraintViolation<LoginForm>> constraintViolations = validator.validate(loginForm);
-        StringBuffer errorMsg = new StringBuffer();
-        constraintViolations.forEach((v) -> {
-            if (errorMsg.length() > 0) {
-                errorMsg.append(";");
-            }
-            errorMsg.append(v.getMessage());
-        });
+        String errorMsg = this.getValidateErrorMsg(loginForm);
         if (errorMsg.length() > 0) {
-            return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR.getCode(), errorMsg.toString()).toJson();
+            return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR.getCode(), errorMsg).toJson();
         }
 
         //登录逻辑
@@ -108,7 +102,10 @@ public class UserServiceImpl implements UserService {
         }
 
         //TODO 产生token存redis
-        return new Result<>(ResponseCodeEnum.HTTP_OK).toJson();
+        String token_key = "abcdefg";
+        RMap<String, Object> map = RedissonUtil.getRMap(redisson, token_key);
+        map.put(token_key, "test");
+        return new Result<>(ResponseCodeEnum.HTTP_OK, user).toJson();
     }
 
     /*
@@ -144,7 +141,29 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectByUsernameOrMobile(account);
     }
 
+    /**
+     * 加密登录密码
+     * @param password 登录密码名文
+     * @return String
+     */
     private String encodePassword(String password) {
         return SecureUtil.md5(SecureUtil.md5(password));
+    }
+
+    /**
+     * 获取验证错误信息
+     * @param obj 待验证对象
+     * @return String
+     */
+    private String getValidateErrorMsg(Object obj) {
+        Set<ConstraintViolation<Object>> constraintViolations = validator.validate(obj);
+        StringBuffer errorMsg = new StringBuffer();
+        constraintViolations.forEach((v) -> {
+            if (errorMsg.length() > 0) {
+                errorMsg.append(";");
+            }
+            errorMsg.append(v.getMessage());
+        });
+        return errorMsg.toString();
     }
 }

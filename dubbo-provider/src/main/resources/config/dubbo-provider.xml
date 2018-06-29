@@ -12,7 +12,9 @@
     <dubbo:application name="dubbo-provider" owner="dubbo-provider"/>
     
     <!-- 定义 zookeeper 注册中心地址及协议 -->  
-    <dubbo:registry address="zookeeper://127.0.0.1:2181"/> 
+    <dubbo:registry address="zookeeper://127.0.0.1:2181">
+        <dubbo:parameter key="qos.port" value="22222"/>
+    </dubbo:registry>
      
     <!-- 定义 Dubbo 协议名称及使用的端口，dubbo 协议缺省端口为 20880，如果配置为 -1 或者没有配置 port，则会分配一个没有被占用的端口 -->  
     <dubbo:protocol name="dubbo" port="-1"/>

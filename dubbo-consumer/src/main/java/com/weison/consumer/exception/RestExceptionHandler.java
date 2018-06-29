@@ -6,6 +6,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * @author xiaomalover <xiaomalover@gmail.com>
+ * 异常捕获处理
+ */
 @ControllerAdvice
 public class RestExceptionHandler {
 

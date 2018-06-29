@@ -2,6 +2,10 @@ package com.weison.consumer.controller;
 
 import org.springframework.validation.BindingResult;
 
+/**
+ * @author xiaomalover <xiaomalover@gmail.com>
+ * 控制器基类
+ */
 public class BaseController {
 
     @SuppressWarnings("WeakerAccess")

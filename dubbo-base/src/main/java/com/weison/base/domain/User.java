@@ -1,4 +1,4 @@
-package com.weison.base.model;
+package com.weison.base.domain;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;

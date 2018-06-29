@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
-@ImportResource(value = { "classpath:config/dubbo-provider.xml" })
+@ImportResource({ "classpath:config/dubbo-provider.xml", "classpath:config/redisson.xml" })
 @MapperScan("com.weison.provider.mapper")
 public class Application {
 

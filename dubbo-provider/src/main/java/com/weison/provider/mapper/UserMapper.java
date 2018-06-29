@@ -1,6 +1,6 @@
 package com.weison.provider.mapper;
 
-import com.weison.base.model.User;
+import com.weison.base.domain.User;
 import java.util.List;
 
 public interface UserMapper {
