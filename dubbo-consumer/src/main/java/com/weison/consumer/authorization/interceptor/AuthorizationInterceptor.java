@@ -1,6 +1,7 @@
 package com.weison.consumer.authorization.interceptor;
 
 import com.weison.consumer.authorization.annotation.Authorization;
+import com.weison.consumer.authorization.constant.TokenConstant;
 import com.weison.consumer.authorization.manager.TokenManager;
 import com.weison.consumer.authorization.model.TokenModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,18 +32,18 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
         Object handler
     ) throws Exception {
         //如果不是映射到方法直接通过
-        /*if (!(handler instanceof HandlerMethod)) {
+        if (!(handler instanceof HandlerMethod)) {
             return true;
         }
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         Method method = handlerMethod.getMethod();
         //从header中得到token
-        String authorization = request.getHeader("token");
+        String authorization = request.getHeader(TokenConstant.TOKEN_PARAM_NAME);
         //验证token
-        TokenModel model = manager.getToken(authorization);
+        TokenModel model = manager.getTokenModel(authorization);
         if (manager.checkToken(model)) {
             //如果token验证成功，将token对应的用户id存在request中，便于之后注入
-            request.setAttribute("userId", model.getUserId());
+            request.setAttribute(TokenConstant.TOKEN_USER_FIELD, model.getUserId());
             return true;
         }
 
@@ -50,7 +51,7 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
         if (method.getAnnotation(Authorization.class) != null) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return false;
-        }*/
+        }
 
         return true;
     }

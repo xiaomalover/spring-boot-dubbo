@@ -3,6 +3,7 @@ package com.weison.consumer.authorization.resolvers;
 import com.weison.consumer.authorization.annotation.CurrentUser;
 import com.weison.base.domain.User;
 import com.weison.base.api.UserService;
+import com.weison.consumer.authorization.constant.TokenConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
@@ -38,11 +39,11 @@ public class CurrentUserMethodArgumentResolver implements HandlerMethodArgumentR
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
         //取出鉴权时存入的登录用户Id
-        Integer currentUserId = (Integer) webRequest.getAttribute("userId", RequestAttributes.SCOPE_REQUEST);
+        Integer currentUserId = (Integer) webRequest.getAttribute(TokenConstant.TOKEN_USER_FIELD, RequestAttributes.SCOPE_REQUEST);
         if (currentUserId != null) {
             //从数据库中查询并返回
             return userService.findById(currentUserId);
         }
-        throw new MissingServletRequestPartException("userId");
+        throw new MissingServletRequestPartException(TokenConstant.TOKEN_USER_FIELD);
     }
 }

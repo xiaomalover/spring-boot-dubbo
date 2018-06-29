@@ -28,4 +28,9 @@ public interface TokenManager {
      */
     public void deleteToken(String token);
 
+    /**
+     * 获取TOKEN 对象
+     * @return
+     */
+    public TokenModel getTokenModel(String token);
 }

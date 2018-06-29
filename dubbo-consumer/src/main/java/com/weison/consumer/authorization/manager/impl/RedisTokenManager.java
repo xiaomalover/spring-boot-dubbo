@@ -2,6 +2,7 @@ package com.weison.consumer.authorization.manager.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.crypto.SecureUtil;
+import com.alibaba.fastjson.JSONObject;
 import com.weison.base.util.RedissonUtil;
 import com.weison.consumer.authorization.constant.TokenConstant;
 import com.weison.consumer.authorization.manager.TokenManager;
@@ -58,6 +59,17 @@ public class RedisTokenManager implements TokenManager {
         //如果验证成功，说明此用户进行了一次有效操作，延长token的过期时间
         //TODO 续期TOKEN
         return true;
+    }
+
+    @Override
+    public TokenModel getTokenModel(String token) {
+        String tokenKey = this.getTokenKey(token);
+        RBucket<Object> t = RedissonUtil.getRBucket(redisson, tokenKey);
+        Object tmp = t.get();
+        if (ObjectUtil.isNotNull(t.get())) {
+            System.out.println(tmp.getClass());
+        }
+        return  null;
     }
 
     @Override
