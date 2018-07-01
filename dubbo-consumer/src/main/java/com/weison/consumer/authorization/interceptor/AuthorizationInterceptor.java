@@ -1,10 +1,8 @@
 package com.weison.consumer.authorization.interceptor;
 
-import cn.hutool.core.util.ObjectUtil;
 import com.weison.consumer.authorization.annotation.Authorization;
 import com.weison.consumer.authorization.constant.TokenConstant;
 import com.weison.consumer.authorization.manager.TokenManager;
-import com.weison.consumer.authorization.model.TokenModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
@@ -22,6 +20,7 @@ import java.lang.reflect.Method;
 @Component
 public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
 
+    @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
     @Autowired
     private TokenManager manager;
 
@@ -43,7 +42,11 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
         //如果验证token失败，并且方法注明了Authorization，返回401错误
         if (method.getAnnotation(Authorization.class) != null) {
             //验证token
-            return manager.checkToken(authorization);
+            boolean auth = manager.checkToken(authorization);
+            if (!auth) {
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+                throw new Exception("未登录");
+            }
         }
 
         return true;

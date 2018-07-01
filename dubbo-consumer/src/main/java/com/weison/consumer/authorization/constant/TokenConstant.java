@@ -1,6 +1,7 @@
 package com.weison.consumer.authorization.constant;
 
 /**
+ * Token相关常量
  * @author xiaomalover <xiaomalover@gmail.com>
  */
 public class TokenConstant {
@@ -9,13 +10,24 @@ public class TokenConstant {
      */
     public final static int TOKKEN_EXPIRED = 15 * 3600;
 
-
+    /**
+     * Token前缀常量
+     */
     public final static String TOKEN_KEY_PREFIX = "token_";
 
+    /**
+     * 用户id与token映射缓存常量
+     */
     public final static String TOKEN_HASH_KEY_PREFIX = "token_hash_";
 
+    /**
+     * 校验参数名常量
+     */
     public final static String TOKEN_PARAM_NAME = "token";
 
+    /**
+     * 当前用户主键常量
+     */
     public final static String TOKEN_USER_FIELD = "userId";
 
 }

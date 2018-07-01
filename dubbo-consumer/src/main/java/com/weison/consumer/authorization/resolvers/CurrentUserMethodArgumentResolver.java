@@ -22,7 +22,6 @@ import org.springframework.web.multipart.support.MissingServletRequestPartExcept
 @Component
 public class CurrentUserMethodArgumentResolver implements HandlerMethodArgumentResolver {
 
-    @SuppressWarnings({"SpringJavaAutowiringInspection", "SpringAutowiredFieldsWarningInspection"})
     @Autowired
     private UserService userService;
 

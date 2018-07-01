@@ -13,18 +13,18 @@ public interface TokenManager {
      * @param userId 指定用户的id
      * @return 生成的token
      */
-    public TokenModel createToken(int userId);
+    TokenModel createToken(int userId);
 
     /**
      * 检查token是否有效
      * @param token token
      * @return 是否有效
      */
-    public boolean checkToken(String token);
+    boolean checkToken(String token);
 
     /**
      * 清除token
      * @param token 用户token
      */
-    public void deleteToken(String token);
+    void deleteToken(String token);
 }

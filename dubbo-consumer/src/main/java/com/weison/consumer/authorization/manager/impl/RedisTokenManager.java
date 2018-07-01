@@ -2,8 +2,6 @@ package com.weison.consumer.authorization.manager.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.crypto.SecureUtil;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.weison.base.util.RedissonUtil;
 import com.weison.consumer.authorization.constant.TokenConstant;
 import com.weison.consumer.authorization.manager.TokenManager;
@@ -24,10 +22,15 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class RedisTokenManager implements TokenManager {
 
-    @SuppressWarnings({"SpringJavaAutowiringInspection", "SpringAutowiredFieldsWarningInspection"})
+    @SuppressWarnings({"SpringJavaInjectionPointsAutowiringInspection", "SpringJavaAutowiredFieldsWarningInspection"})
     @Autowired
     RedissonClient redisson;
 
+    /**
+     * 创建TOKEN
+     * @param userId 指定用户的id
+     * @return TokenModel
+     */
     @Override
     public TokenModel createToken(int userId) {
 
@@ -44,12 +47,18 @@ public class RedisTokenManager implements TokenManager {
         return tokenModel;
     }
 
+    /**
+     * 校验TOKEN
+     * @param token token
+     * @return result
+     */
     @Override
     public boolean checkToken(String token) {
         String tokenKey = this.getTokenKey(token);
         RBucket<Object> t = RedissonUtil.getRBucket(redisson, tokenKey);
         TokenModel j = (TokenModel) t.get();
         if (ObjectUtil.isNotNull(j)) {
+            //校验通过，续期TOKEN
             j.setTtl(TokenConstant.TOKKEN_EXPIRED);
             t.set(j, TokenConstant.TOKKEN_EXPIRED, TimeUnit.SECONDS);
             return true;
@@ -57,6 +66,10 @@ public class RedisTokenManager implements TokenManager {
         return  false;
     }
 
+    /**
+     * 删除TOKEN
+     * @param token 用户token
+     */
     @Override
     public void deleteToken(String token) {
         //删除token
@@ -66,6 +79,7 @@ public class RedisTokenManager implements TokenManager {
     }
 
     /**
+     * 获取Token的存储键
      * @param token Token
      * @return String
      */
@@ -73,6 +87,11 @@ public class RedisTokenManager implements TokenManager {
         return TokenConstant.TOKEN_KEY_PREFIX + token;
     }
 
+    /**
+     * 处理TOKEN与用户ID的映射，以便在二次登录时清楚除旧的token
+     * @param userId 用户id
+     * @param token Token
+     */
     private void handHash(Integer userId, String token) {
         String hashKey = TokenConstant.TOKEN_HASH_KEY_PREFIX + SecureUtil.md5(userId.toString()).substring(0, 2);
         RMap<Integer, String> map = RedissonUtil.getRMap(redisson, hashKey);

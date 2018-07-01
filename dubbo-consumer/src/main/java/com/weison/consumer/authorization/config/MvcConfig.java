@@ -7,17 +7,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-
 import java.util.List;
 
 /**
  * 配置类，增加自定义拦截器和解析器
  * @see com.weison.consumer.authorization.resolvers.CurrentUserMethodArgumentResolver
  * @see com.weison.consumer.authorization.interceptor.AuthorizationInterceptor
- * @author ScienJus
- * @date 2015/7/30.
+ * @author xiaomalover <xiaomalover@gmail.com>
  */
-@SuppressWarnings({"SpringAutowiredFieldsWarningInspection", "SpringJavaAutowiringInspection"})
+@SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
 @Configuration
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
