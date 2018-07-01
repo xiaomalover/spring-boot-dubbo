@@ -39,22 +39,11 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
         Method method = handlerMethod.getMethod();
         //从header中得到token
         String authorization = request.getHeader(TokenConstant.TOKEN_PARAM_NAME);
-        //验证token
-        System.out.println(authorization);
-        TokenModel model = manager.getTokenModel(authorization);
-        if (ObjectUtil.isNotNull(model)) {
-            System.out.println(model.getClass());
-            if (manager.checkToken(model)) {
-                //如果token验证成功，将token对应的用户id存在request中，便于之后注入
-                request.setAttribute(TokenConstant.TOKEN_USER_FIELD, model.getUserId());
-                return true;
-            }
-        }
 
         //如果验证token失败，并且方法注明了Authorization，返回401错误
         if (method.getAnnotation(Authorization.class) != null) {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            return false;
+            //验证token
+            return manager.checkToken(authorization);
         }
 
         return true;

@@ -2,6 +2,7 @@ package com.weison.consumer.authorization.manager.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.crypto.SecureUtil;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.weison.base.util.RedissonUtil;
 import com.weison.consumer.authorization.constant.TokenConstant;
@@ -43,33 +44,17 @@ public class RedisTokenManager implements TokenManager {
         return tokenModel;
     }
 
-
     @Override
-    public boolean checkToken(TokenModel model) {
-        if (model == null) {
-            return false;
-        }
-
-        String tokenKey = this.getTokenKey(model.getToken());
-
-        RBucket<String> t = RedissonUtil.getRBucket(redisson, tokenKey);
-
-        System.out.println(t.get());
-
-        //如果验证成功，说明此用户进行了一次有效操作，延长token的过期时间
-        //TODO 续期TOKEN
-        return true;
-    }
-
-    @Override
-    public TokenModel getTokenModel(String token) {
+    public boolean checkToken(String token) {
         String tokenKey = this.getTokenKey(token);
         RBucket<Object> t = RedissonUtil.getRBucket(redisson, tokenKey);
-        Object tmp = t.get();
-        if (ObjectUtil.isNotNull(t.get())) {
-            System.out.println(tmp.getClass());
+        TokenModel j = (TokenModel) t.get();
+        if (ObjectUtil.isNotNull(j)) {
+            j.setTtl(TokenConstant.TOKKEN_EXPIRED);
+            t.set(j, TokenConstant.TOKKEN_EXPIRED, TimeUnit.SECONDS);
+            return true;
         }
-        return  null;
+        return  false;
     }
 
     @Override

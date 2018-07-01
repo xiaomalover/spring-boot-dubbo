@@ -6,9 +6,7 @@ import java.io.Serializable;
  * Token的Model类，可以增加字段提高安全性，例如时间戳、url签名
  * @author xiaomalover <xiaomalover@gmail.com>
  */
-public class TokenModel implements Serializable {
-
-    private static final long serialVersionUID = -3022498620763167474L;
+public class TokenModel {
 
     /**
      * 用户id
@@ -25,7 +23,10 @@ public class TokenModel implements Serializable {
      */
     private int ttl;
 
-    public TokenModel(long userId, String toke, int ttl) {
+    public TokenModel() {
+    }
+
+    public TokenModel(long userId, String token, int ttl) {
         this.userId = userId;
         this.token = token;
         this.ttl = ttl;

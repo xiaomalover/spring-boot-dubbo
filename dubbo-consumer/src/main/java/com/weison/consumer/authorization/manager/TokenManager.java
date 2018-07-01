@@ -17,20 +17,14 @@ public interface TokenManager {
 
     /**
      * 检查token是否有效
-     * @param model token
+     * @param token token
      * @return 是否有效
      */
-    public boolean checkToken(TokenModel model);
+    public boolean checkToken(String token);
 
     /**
      * 清除token
      * @param token 用户token
      */
     public void deleteToken(String token);
-
-    /**
-     * 获取TOKEN 对象
-     * @return
-     */
-    public TokenModel getTokenModel(String token);
 }
