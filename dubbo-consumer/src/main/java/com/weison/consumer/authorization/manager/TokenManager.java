@@ -16,11 +16,11 @@ public interface TokenManager {
     TokenModel createToken(int userId);
 
     /**
-     * 检查token是否有效
+     * 检查token是否有效, 有效返回用户ID
      * @param token token
      * @return 是否有效
      */
-    boolean checkToken(String token);
+    int checkToken(String token);
 
     /**
      * 清除token

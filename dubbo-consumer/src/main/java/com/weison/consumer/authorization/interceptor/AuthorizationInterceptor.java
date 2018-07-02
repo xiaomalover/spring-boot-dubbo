@@ -42,11 +42,14 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
         //如果验证token失败，并且方法注明了Authorization，返回401错误
         if (method.getAnnotation(Authorization.class) != null) {
             //验证token
-            boolean auth = manager.checkToken(authorization);
-            if (!auth) {
+            int authUserId = manager.checkToken(authorization);
+            if (authUserId == 0) {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                 return false;
             }
+
+            //获取用户id，放入参数
+            request.setAttribute(TokenConstant.TOKEN_USER_FIELD, authUserId);
         }
 
         return true;

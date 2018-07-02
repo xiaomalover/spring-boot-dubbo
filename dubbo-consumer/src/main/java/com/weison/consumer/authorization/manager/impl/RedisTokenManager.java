@@ -53,7 +53,7 @@ public class RedisTokenManager implements TokenManager {
      * @return result
      */
     @Override
-    public boolean checkToken(String token) {
+    public int checkToken(String token) {
         String tokenKey = this.getTokenKey(token);
         RBucket<Object> t = RedissonUtil.getRBucket(redisson, tokenKey);
         TokenModel j = (TokenModel) t.get();
@@ -61,9 +61,9 @@ public class RedisTokenManager implements TokenManager {
             //校验通过，续期TOKEN
             j.setTtl(TokenConstant.TOKKEN_EXPIRED);
             t.set(j, TokenConstant.TOKKEN_EXPIRED, TimeUnit.SECONDS);
-            return true;
+            return j.getUserId();
         }
-        return  false;
+        return  0;
     }
 
     /**

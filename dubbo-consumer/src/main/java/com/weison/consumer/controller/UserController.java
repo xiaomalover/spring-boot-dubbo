@@ -7,6 +7,7 @@ import com.weison.base.constant.ResponseCodeEnum;
 import com.weison.base.dto.Result;
 import com.weison.base.model.form.LoginForm;
 import com.weison.consumer.authorization.annotation.Authorization;
+import com.weison.consumer.authorization.annotation.CurrentUser;
 import com.weison.consumer.authorization.manager.TokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -71,8 +72,8 @@ public class UserController extends BaseController{
     }
 
     @Authorization
-    @GetMapping(value = "/{userId}", produces = {"application/json;charset=UTF-8"})
-    public Object findOneUser(@PathVariable("userId") int userId) {
-        return new Result<>(ResponseCodeEnum.HTTP_OK, userService.findById(userId));
+    @GetMapping(value = "/info", produces = {"application/json;charset=UTF-8"})
+    public Object userInfo(@CurrentUser User user) {
+        return new Result<>(ResponseCodeEnum.HTTP_OK, user);
     }
 }

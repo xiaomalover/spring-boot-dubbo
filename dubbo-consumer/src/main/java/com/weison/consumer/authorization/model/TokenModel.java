@@ -1,7 +1,5 @@
 package com.weison.consumer.authorization.model;
 
-import java.io.Serializable;
-
 /**
  * Token的Model类，可以增加字段提高安全性，例如时间戳、url签名
  * @author xiaomalover <xiaomalover@gmail.com>
@@ -11,7 +9,7 @@ public class TokenModel {
     /**
      * 用户id
      */
-    private long userId;
+    private int userId;
 
     /**
      * 随机生成的uuid
@@ -26,17 +24,17 @@ public class TokenModel {
     public TokenModel() {
     }
 
-    public TokenModel(long userId, String token, int ttl) {
+    public TokenModel(int userId, String token, int ttl) {
         this.userId = userId;
         this.token = token;
         this.ttl = ttl;
     }
 
-    public long getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
