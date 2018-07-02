@@ -8,10 +8,7 @@ import com.weison.base.constant.ResponseCodeEnum;
 import com.weison.base.dto.Result;
 import com.weison.base.domain.User;
 import com.weison.base.model.form.LoginForm;
-import com.weison.base.util.RedissonUtil;
 import com.weison.provider.mapper.UserMapper;
-import org.redisson.api.RMap;
-import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.validation.ConstraintViolation;
@@ -21,7 +18,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Created by Administrator on 2017/8/16.
+ * @author xiaomalover <xiaomalover@gmail.com>
  */
 @SuppressWarnings({"SpringAutowiredFieldsWarningInspection", "SpringJavaAutowiringInspection"})
 @Service(value = "userService")
@@ -29,9 +26,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
-
-    @Autowired
-    private RedissonClient redisson;
 
     /**
      * 验证器
@@ -68,7 +62,7 @@ public class UserServiceImpl implements UserService {
         String timestamp = String.valueOf(System.currentTimeMillis());
         int length = timestamp.length();
         int now = Integer.valueOf(timestamp.substring(0,length-3));
-        user.setCreated_at(now);
+        user.setCreatedAt(now);
 
         //密码加密
         user.setPassword(this.encodePassword(user.getPassword()));

@@ -1,9 +1,11 @@
 package com.weison.base.model.form;
 
 import org.hibernate.validator.constraints.NotBlank;
-
 import java.io.Serializable;
 
+/**
+ * @author xiaomalover <xiaomalover@gmail.com>
+ */
 public class LoginForm implements Serializable {
 
     @NotBlank(message = "帐号不能为空")

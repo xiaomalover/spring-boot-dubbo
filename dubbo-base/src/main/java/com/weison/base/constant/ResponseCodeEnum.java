@@ -1,6 +1,7 @@
 package com.weison.base.constant;
 
 /**
+ * @author xiaomalover <xiaomalover@gmail.com>
  * 请求状态码枚举
  */
 public enum ResponseCodeEnum {

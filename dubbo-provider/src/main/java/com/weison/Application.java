@@ -5,6 +5,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
 
+/**
+ * @author xiaomalover <xiaomalover@gmail.com>
+ * 生产者程序入口
+ */
 @SpringBootApplication
 @ImportResource({ "classpath:config/dubbo-provider.xml", "classpath:config/redisson.xml" })
 @MapperScan("com.weison.provider.mapper")

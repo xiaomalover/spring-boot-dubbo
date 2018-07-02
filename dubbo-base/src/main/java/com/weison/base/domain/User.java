@@ -2,10 +2,13 @@ package com.weison.base.domain;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
-
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
+/**
+ * @author xiaomalover <xiaomalover@gmail.com>
+ * 用户数据库模型
+ */
 public class User implements Serializable{
 
     private static final long serialVersionUID = -3052498620783167474L;
@@ -28,9 +31,9 @@ public class User implements Serializable{
 
     private Integer status;
 
-    private Integer created_at;
+    private Integer createdAt;
 
-    private Integer updated_at;
+    private Integer updatedAt;
 
     public Integer getId() {
         return id;
@@ -80,19 +83,19 @@ public class User implements Serializable{
         this.status = status;
     }
 
-    public Integer getCreated_at() {
-        return created_at;
+    public Integer getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated_at(Integer created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(Integer createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public Integer getUpdated_at() {
-        return updated_at;
+    public Integer getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setUpdated_at(Integer updated_at) {
-        this.updated_at = updated_at;
+    public void setUpdatedAt(Integer updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

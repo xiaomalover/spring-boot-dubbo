@@ -5,6 +5,7 @@ import com.weison.base.model.form.LoginForm;
 import java.util.List;
 
 /**
+ * @author xiaomalover <xiaomalover@gmail.com>
  * 用户接口类
  */
 public interface UserService {

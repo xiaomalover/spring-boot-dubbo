@@ -6,6 +6,7 @@ import com.weison.base.constant.ResponseCodeEnum;
 import java.io.Serializable;
 
 /**
+ * @author xiaomalover <xiaomalover@gmail.com>
  * 请求返回数据对象
  * @param <T>
  */

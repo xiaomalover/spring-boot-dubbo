@@ -6,17 +6,20 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
+/**
+ * @author xiaomalover <xiaomalover@gmail.com>
+ */
 @Component
 public class LogManager {
 
     private static Logger logger = LoggerFactory.getLogger(LogAspect.class);
 
-    private static final Boolean enableWatch = true;
+    private static final Boolean ENABLE_WATCH = true;
 
     @SuppressWarnings("WeakerAccess")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 
-        if (!enableWatch) {
+        if (!ENABLE_WATCH) {
             return joinPoint.proceed();
         }
 

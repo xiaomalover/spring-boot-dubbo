@@ -12,78 +12,79 @@ public class RedissonUtil {
     /**
      * 获取字符串对象
      *
-     * @param objectName
-     * @return
+     * @param redissonClient redisson客户端
+     * @param objectName 缓存键名
+     * @return RBucket
      */
     public static <T> RBucket<T> getRBucket(RedissonClient redissonClient, String objectName) {
-        RBucket<T> bucket = redissonClient.getBucket(objectName);
-        return bucket;
+        return redissonClient.getBucket(objectName);
     }
 
     /**
      * 获取Map对象
      *
-     * @param objectName
-     * @return
+     * @param redissonClient redisson客户端
+     * @param objectName 缓存键名
+     * @return RMap
      */
     public static <K, V> RMap<K, V> getRMap(RedissonClient redissonClient, String objectName) {
-        RMap<K, V> map = redissonClient.getMap(objectName);
-        return map;
+        return redissonClient.getMap(objectName);
     }
 
     /**
      * 获取有序集合
      *
-     * @param objectName
-     * @return
+     * @param redissonClient redisson客户端
+     * @param objectName 缓存键名
+     * @return RSortedSet
      */
     public static <V> RSortedSet<V> getRSortedSet(RedissonClient redissonClient, String objectName) {
-        RSortedSet<V> sortedSet = redissonClient.getSortedSet(objectName);
-        return sortedSet;
+        return redissonClient.getSortedSet(objectName);
     }
 
     /**
      * 获取集合
      *
-     * @param objectName
-     * @return
+     * @param redissonClient redisson客户端
+     * @param objectName 缓存键名
+     * @return RSet
      */
     public static <V> RSet<V> getRSet(RedissonClient redissonClient, String objectName) {
-        RSet<V> rSet = redissonClient.getSet(objectName);
-        return rSet;
+        return redissonClient.getSet(objectName);
     }
 
     /**
      * 获取列表
      *
-     * @param objectName
-     * @return
+     * @param redissonClient redisson客户端
+     * @param objectName 缓存键名
+     * @return RList
      */
     public static <V> RList<V> getRList(RedissonClient redissonClient, String objectName) {
-        RList<V> rList = redissonClient.getList(objectName);
-        return rList;
+        return redissonClient.getList(objectName);
     }
 
     /**
      * 获取队列
      *
-     * @param objectName
-     * @return
+     * @param redissonClient redisson客户端
+     * @param objectName 缓存键名
+     * @return RQueue
      */
     public static <V> RQueue<V> getRQueue(RedissonClient redissonClient, String objectName) {
-        RQueue<V> rQueue = redissonClient.getQueue(objectName);
-        return rQueue;
+        return redissonClient.getQueue(objectName);
     }
 
     /**
      * 获取双端队列
      *
-     * @param objectName
-     * @return
+     *
+     * @param redissonClient redisson客户端
+     * @param objectName 缓存键名
+     * @return RDeque
      */
     public static <V> RDeque<V> getRDeque(RedissonClient redissonClient, String objectName) {
-        RDeque<V> rDeque = redissonClient.getDeque(objectName);
-        return rDeque;
+        return  redissonClient.getDeque(objectName);
     }
 
     /**
@@ -102,46 +103,45 @@ public class RedissonUtil {
     /**
      * 获取锁
      *
-     * @param objectName
-     * @return
+     * @param redissonClient redisson客户端
+     * @param objectName 缓存键名
+     * @return RLock
      */
     public static RLock getRLock(RedissonClient redissonClient, String objectName) {
-        RLock rLock = redissonClient.getLock(objectName);
-        return rLock;
+        return redissonClient.getLock(objectName);
     }
 
     /**
      * 获取原子数
      *
-     * @param objectName
-     * @return
+     * @param redissonClient redisson客户端
+     * @param objectName 缓存键名
+     * @return RAtomicLong
      */
     public static RAtomicLong getRAtomicLong(RedissonClient redissonClient, String objectName) {
-        RAtomicLong rAtomicLong = redissonClient.getAtomicLong(objectName);
-        return rAtomicLong;
+        return redissonClient.getAtomicLong(objectName);
     }
 
     /**
      * 获取记数锁
      *
-     * @param objectName
-     * @return
+     * @param redissonClient redisson客户端
+     * @param objectName 缓存键名
+     * @return RCountDownLatch
      */
     public static RCountDownLatch getRCountDownLatch(RedissonClient redissonClient, String objectName) {
-        RCountDownLatch rCountDownLatch = redissonClient.getCountDownLatch(objectName);
-        return rCountDownLatch;
+        return redissonClient.getCountDownLatch(objectName);
     }
 
     /**
      * 获取消息的Topic
      *
-     * @param objectName
-     * @return
+     * @param redissonClient redisson客户端
+     * @param objectName 缓存键名
+     * @return RTopic
      */
     public static <M> RTopic<M> getRTopic(RedissonClient redissonClient, String objectName) {
-        RTopic<M> rTopic = redissonClient.getTopic(objectName);
-        return rTopic;
+        return redissonClient.getTopic(objectName);
     }
-
 
 }

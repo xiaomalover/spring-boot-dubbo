@@ -10,7 +10,7 @@
             #{username,jdbcType=VARCHAR},
             #{password,jdbcType=VARCHAR},
             #{mobile,jdbcType=VARCHAR},
-            #{created_at, jdbcType=INTEGER}
+            #{createdAt, jdbcType=INTEGER}
         )
     </insert>
 
