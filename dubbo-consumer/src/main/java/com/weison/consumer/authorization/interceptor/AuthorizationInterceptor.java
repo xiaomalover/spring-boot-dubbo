@@ -20,7 +20,7 @@ import java.lang.reflect.Method;
 @Component
 public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
 
-    @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
+    @SuppressWarnings({"SpringJavaAutowiredFieldsWarningInspection", "SpringAutowiredFieldsWarningInspection"})
     @Autowired
     private TokenManager manager;
 
@@ -45,7 +45,7 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
             boolean auth = manager.checkToken(authorization);
             if (!auth) {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-                throw new Exception("未登录");
+                return false;
             }
         }
 
