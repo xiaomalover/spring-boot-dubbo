@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class RedisTokenManager implements TokenManager {
 
-    @SuppressWarnings({"SpringJavaInjectionPointsAutowiringInspection", "SpringJavaAutowiredFieldsWarningInspection"})
+    @SuppressWarnings({"SpringJavaAutowiringInspection", "SpringAutowiredFieldsWarningInspection"})
     @Autowired
     RedissonClient redisson;
 

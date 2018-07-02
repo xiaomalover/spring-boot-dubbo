@@ -9,6 +9,7 @@ import com.weison.base.model.form.LoginForm;
 import com.weison.consumer.authorization.annotation.Authorization;
 import com.weison.consumer.authorization.annotation.CurrentUser;
 import com.weison.consumer.authorization.manager.TokenManager;
+import com.weison.consumer.authorization.model.TokenModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -58,7 +59,7 @@ public class UserController extends BaseController{
             //服务端返回成功存入TOKEN
             JSONObject jsonUser = (JSONObject) res.getData();
             User user = jsonUser.toJavaObject(User.class);
-            tokenManager.createToken(user.getId());
+            return new Result<>(ResponseCodeEnum.HTTP_OK, tokenManager.createToken(user.getId()));
         }
         return res;
     }

@@ -15,7 +15,7 @@ import java.util.List;
  * @see com.weison.consumer.authorization.interceptor.AuthorizationInterceptor
  * @author xiaomalover <xiaomalover@gmail.com>
  */
-@SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
+@SuppressWarnings("SpringAutowiredFieldsWarningInspection")
 @Configuration
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
