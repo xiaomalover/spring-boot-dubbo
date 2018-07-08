@@ -2,10 +2,10 @@ package com.weison.consumer.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.weison.base.api.UserService;
-import com.weison.base.domain.User;
+import com.weison.base.po.User;
 import com.weison.base.constant.ResponseCodeEnum;
 import com.weison.base.dto.Result;
-import com.weison.base.model.form.LoginForm;
+import com.weison.base.dto.LoginForm;
 import com.weison.consumer.authorization.annotation.Authorization;
 import com.weison.consumer.authorization.annotation.CurrentUser;
 import com.weison.consumer.authorization.manager.TokenManager;

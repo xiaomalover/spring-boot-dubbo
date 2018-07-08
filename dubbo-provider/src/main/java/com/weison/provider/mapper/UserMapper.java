@@ -1,6 +1,6 @@
 package com.weison.provider.mapper;
 
-import com.weison.base.domain.User;
+import com.weison.base.po.User;
 import java.util.List;
 
 /**

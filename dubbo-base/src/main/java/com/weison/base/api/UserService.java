@@ -1,7 +1,7 @@
 package com.weison.base.api;
 
-import com.weison.base.domain.User;
-import com.weison.base.model.form.LoginForm;
+import com.weison.base.po.User;
+import com.weison.base.dto.LoginForm;
 import java.util.List;
 
 /**

@@ -2,7 +2,7 @@ package com.weison.consumer.authorization.resolvers;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.weison.base.api.UserService;
-import com.weison.base.domain.User;
+import com.weison.base.po.User;
 import com.weison.consumer.authorization.annotation.CurrentUser;
 import com.weison.consumer.authorization.constant.TokenConstant;
 import org.springframework.beans.factory.annotation.Autowired;

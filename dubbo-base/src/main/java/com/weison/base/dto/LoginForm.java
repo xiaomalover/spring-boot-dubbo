@@ -1,4 +1,4 @@
-package com.weison.base.model.form;
+package com.weison.base.dto;
 
 import org.hibernate.validator.constraints.NotBlank;
 import java.io.Serializable;
