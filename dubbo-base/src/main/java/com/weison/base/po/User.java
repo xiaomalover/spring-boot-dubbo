@@ -1,5 +1,6 @@
 package com.weison.base.po;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -9,6 +10,7 @@ import java.io.Serializable;
  * @author xiaomalover <xiaomalover@gmail.com>
  * 用户数据库模型
  */
+@JsonIgnoreProperties(value = "password")
 public class User implements Serializable{
 
     private static final long serialVersionUID = -3052498620783167474L;

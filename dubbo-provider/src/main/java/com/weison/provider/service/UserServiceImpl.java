@@ -82,10 +82,8 @@ public class UserServiceImpl implements UserService {
             return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR.getCode(), errorMsg).toJson();
         }
 
-        //登录逻辑
-        User user;
         //查询用户存不存在
-        user = this.findByUsernameOrMobile(loginForm.getAccount());
+        User user = this.findByUsernameOrMobile(loginForm.getAccount());
         if (ObjectUtil.isNull(user)) {
             return new Result<>(ResponseCodeEnum.NORMAL_RETURN_ERROR.getCode(), "用户名不正确").toJson();
         }
