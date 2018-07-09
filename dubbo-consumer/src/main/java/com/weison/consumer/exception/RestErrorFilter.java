@@ -1,7 +1,7 @@
 package com.weison.consumer.exception;
 
 import com.weison.base.constant.ResponseCodeEnum;
-import com.weison.base.dto.Result;
+import com.weison.base.dto.ResultResponse;
 import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,9 +24,9 @@ public class RestErrorFilter implements ErrorController {
         switch (code) {
             case HttpServletResponse.SC_UNAUTHORIZED:
                 response.setStatus(HttpStatus.OK.value());
-                return new Result<>(ResponseCodeEnum.HTTP_UNAUTHORIZED);
+                return new ResultResponse<>(ResponseCodeEnum.HTTP_UNAUTHORIZED);
             default:
-                return new Result<>(ResponseCodeEnum.HTTP_NOT_FOUND);
+                return new ResultResponse<>(ResponseCodeEnum.HTTP_NOT_FOUND);
         }
     }
 

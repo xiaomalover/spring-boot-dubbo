@@ -6,7 +6,7 @@ import java.io.Serializable;
 /**
  * @author xiaomalover <xiaomalover@gmail.com>
  */
-public class LoginForm implements Serializable {
+public class UserLoginRequest implements Serializable {
 
     @NotBlank(message = "帐号不能为空")
     private String account;

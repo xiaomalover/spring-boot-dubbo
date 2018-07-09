@@ -1,7 +1,7 @@
 package com.weison.consumer.exception;
 
 import com.weison.base.constant.ResponseCodeEnum;
-import com.weison.base.dto.Result;
+import com.weison.base.dto.ResultResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +19,6 @@ public class RestExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public Object requestNotReadable(Exception e) {
-        return new Result<>(ResponseCodeEnum.HTTP_INTERNAL_SERVER_ERROR, e.getMessage());
+        return new ResultResponse<>(ResponseCodeEnum.HTTP_INTERNAL_SERVER_ERROR, e.getMessage());
     }
 }

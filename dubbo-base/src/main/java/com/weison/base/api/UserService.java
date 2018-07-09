@@ -1,7 +1,8 @@
 package com.weison.base.api;
 
-import com.weison.base.po.User;
-import com.weison.base.dto.LoginForm;
+import com.weison.base.dto.UserModel;
+import com.weison.base.dto.UserLoginRequest;
+import com.weison.base.dto.UserRegisterRequest;
 import java.util.List;
 
 /**
@@ -12,51 +13,30 @@ public interface UserService {
 
     /**
      * 用户注册
-     * @param user 用户实体
+     * @param userRegisterRequest 注册实体
      * @return User
      */
-    Object register(User user);
+    Object register(UserRegisterRequest userRegisterRequest);
 
     /**
      * 用户登录
-     * @param loginForm 登录实体
+     * @param userLoginRequest 登录实体
      * @return Object
      */
-    Object login(LoginForm loginForm);
+    Object login(UserLoginRequest userLoginRequest);
 
     /**
      * 查所有用户
      * @param pageNum 页码数
      * @param pageSize 每页条数
-     * @return List <User>
+     * @return List <UserModel>
      */
-    List <User> findAllUser(int pageNum, int pageSize);
+    List <UserModel> getUserList(int pageNum, int pageSize);
 
     /**
-     * 根据用户主键查单个用户
-     * @param id 用户主键
-     * @return User
+     * 查询一个用户
+     * @param userId 用户ID
+     * @return UserModel
      */
-    User findById(int id);
-
-    /**
-     * 根据用户名查单个用户
-     * @param username 用户名
-     * @return User
-     */
-    User findByUsername(String username);
-
-    /**
-     * 根据手机号查单个用户
-     * @param mobile 手机号
-     * @return User
-     */
-    User findByMobile(String mobile);
-
-    /**
-     * 根据用户名或手机号查单个用户
-     * @param account 用户名或手机号
-     * @return User
-     */
-    User findByUsernameOrMobile(String account);
+    UserModel getUser(int userId);
 }

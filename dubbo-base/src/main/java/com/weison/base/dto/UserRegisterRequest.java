@@ -1,6 +1,5 @@
-package com.weison.base.po;
+package com.weison.base.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -8,14 +7,8 @@ import java.io.Serializable;
 
 /**
  * @author xiaomalover <xiaomalover@gmail.com>
- * 用户数据库模型
  */
-@JsonIgnoreProperties(value = "password")
-public class User implements Serializable{
-
-    private static final long serialVersionUID = -3052498620783167474L;
-
-    private Integer id;
+public class UserRegisterRequest implements Serializable {
 
     @NotBlank(message = "用户名不能为空")
     @Length(min = 4, message = "用户名长度不能少于4位")
@@ -30,20 +23,6 @@ public class User implements Serializable{
     private String mobile;
 
     private String email;
-
-    private Integer status;
-
-    private Integer createdAt;
-
-    private Integer updatedAt;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;
@@ -75,29 +54,5 @@ public class User implements Serializable{
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public Integer getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Integer createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Integer getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Integer updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }

@@ -3,7 +3,7 @@
 <!--suppress SqlNoDataSourceInspection, SqlDialectInspection -->
 <mapper namespace="com.weison.provider.mapper.UserMapper">
 
-    <insert id="insert" parameterType="com.weison.base.po.User">
+    <insert id="insert" parameterType="com.weison.provider.model.User">
         insert into
             user_info (username, password, mobile, created_at)
         values(
@@ -14,23 +14,23 @@
         )
     </insert>
 
-    <select id="queryAll" resultType="com.weison.base.po.User">
+    <select id="queryAll" resultType="com.weison.provider.model.User">
         SELECT  * from user_info
     </select>
 
-    <select id="selectByPrimaryKey" resultType="com.weison.base.po.User" parameterType="int">
+    <select id="selectByPrimaryKey" resultType="com.weison.provider.model.User" parameterType="int">
         SELECT  * from user_info where id = #{id}
     </select>
 
-    <select id="selectByUsername" resultType="com.weison.base.po.User" parameterType="String">
+    <select id="selectByUsername" resultType="com.weison.provider.model.User" parameterType="String">
         SELECT  * from user_info where username = #{username}
     </select>
 
-    <select id="selectByMobile" resultType="com.weison.base.po.User" parameterType="String">
+    <select id="selectByMobile" resultType="com.weison.provider.model.User" parameterType="String">
         SELECT  * from user_info where mobile = #{mobile}
     </select>
 
-    <select id="selectByUsernameOrMobile" resultType="com.weison.base.po.User" parameterType="String">
+    <select id="selectByUsernameOrMobile" resultType="com.weison.provider.model.User" parameterType="String">
         SELECT  * from user_info where username = #{acount} OR mobile = #{account}
     </select>
 

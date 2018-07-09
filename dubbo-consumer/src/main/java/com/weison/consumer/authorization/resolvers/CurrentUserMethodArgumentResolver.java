@@ -2,7 +2,7 @@ package com.weison.consumer.authorization.resolvers;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.weison.base.api.UserService;
-import com.weison.base.po.User;
+import com.weison.base.dto.UserModel;
 import com.weison.consumer.authorization.annotation.CurrentUser;
 import com.weison.consumer.authorization.constant.TokenConstant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class CurrentUserMethodArgumentResolver implements HandlerMethodArgumentR
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
         //如果参数类型是User并且有CurrentUser注解则支持
-        return parameter.getParameterType().isAssignableFrom(User.class) &&
+        return parameter.getParameterType().isAssignableFrom(UserModel.class) &&
                 parameter.hasParameterAnnotation(CurrentUser.class);
     }
 
@@ -44,8 +44,7 @@ public class CurrentUserMethodArgumentResolver implements HandlerMethodArgumentR
         int currentUserId = (int) webRequest.getAttribute(TokenConstant.TOKEN_USER_FIELD, RequestAttributes.SCOPE_REQUEST);
         if (ObjectUtil.isNotNull(currentUserId)) {
             //从数据库中查询并返回
-
-            return userService.findById(currentUserId);
+            return userService.getUser(currentUserId);
         }
         throw new MissingServletRequestPartException(TokenConstant.TOKEN_USER_FIELD);
     }

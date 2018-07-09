@@ -38,7 +38,7 @@ spring:
 #mybatis
 mybatis:
     mapper-locations: classpath:mapping/*.xml
-    type-aliases-package: com.weison.base.model
+    type-aliases-package: com.weison.provider.model
     configLocation: classpath:/config/mybatis-config.xml
 #pagehelper分页插件
 pagehelper:
