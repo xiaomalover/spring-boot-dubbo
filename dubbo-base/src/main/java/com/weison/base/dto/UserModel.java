@@ -1,12 +1,10 @@
 package com.weison.base.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 
 /**
  * @author xiaomalover <xiaomalover@gmail.com>
  */
-@JsonIgnoreProperties(value = {"password"})
 public class UserModel implements Serializable{
 
     private static final long serialVersionUID = -211433346433204938L;
