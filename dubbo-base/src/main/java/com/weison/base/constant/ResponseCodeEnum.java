@@ -74,7 +74,7 @@ public enum ResponseCodeEnum {
     /**
      * 自定义状态码
      */
-    NORMAL_RETURN_ERROR(1000, "请求出错"), //通用错误码
+    NORMAL_RETURN_ERROR(1000, "请求出错"),
     ;
 
     private int code;
